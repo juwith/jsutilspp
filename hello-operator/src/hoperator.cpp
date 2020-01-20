@@ -22,6 +22,11 @@ HeyOper HeyOper::operator+(const HeyOper& obj)
 	return temp;
 }
 
+HeyOper& HeyOper::operator+=(const HeyOper& obj)
+{
+	(*this) = (*this) + obj;
+	return *this;
+}
 
 HeyOper::HeyOper(int val)
 {
@@ -30,6 +35,29 @@ HeyOper::HeyOper(int val)
 };
 
 HeyOper::~HeyOper()
+{
+	//cout << "destructor" << endl;
+}
+
+////////////////////
+
+void HeyArrOper::printinfo()
+{
+	cout << "print info val : " << arr << endl;
+}
+
+char& HeyArrOper::operator[](int count)
+{
+	return this->arr[count];
+}
+
+HeyArrOper::HeyArrOper(char* arr)
+{
+	//cout << "constructor" << endl;
+	strcpy(this->arr,arr);
+};
+
+HeyArrOper::~HeyArrOper()
 {
 	//cout << "destructor" << endl;
 }
