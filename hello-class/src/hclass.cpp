@@ -6,13 +6,22 @@ using namespace std;
 
 void Hello::printinfo()
 {
-	cout << this->val << endl;
+	cout << "print info val : " << this->val << ", str : " <<this->str << endl;
 }
 
-int main()
+
+Hello::Hello(int val,const char* str)
 {
-	Hello h(5);
-	h.printinfo();
+	cout << "constructor" << endl;
+	this->val = val;
+	this->str = new char[strlen(str) + 1];
+	strcpy(this->str,str);
+};
 
-	return 0;
-}
+Hello::~Hello()
+{
+	cout << "destructor" << endl;
+	delete str;
+};
+
+
