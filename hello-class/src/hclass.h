@@ -1,8 +1,6 @@
 #ifndef HELLO_H_INCLUDED
 #define HELLO_H_INCLUDED
 
-#include <string.h>
-
 class Hello
 {
 private:
