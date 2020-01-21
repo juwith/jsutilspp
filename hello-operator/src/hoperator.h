@@ -1,5 +1,5 @@
-#ifndef HELLO_H_INCLUDED
-#define HELLO_H_INCLUDED
+#ifndef HOPERATOR_H_INCLUDED
+#define HOPERATOR_H_INCLUDED
 
 class HeyOper
 {
@@ -14,17 +14,4 @@ public:
 	HeyOper& operator+=(const HeyOper& obj);
 };
 
-class HeyArrOper
-{
-private:
-	char arr[128];
-public:
-	HeyArrOper(char* arr);
-	~HeyArrOper();
-	void printinfo();
-	char& operator[](int count);
-};
-
-
 #endif
-

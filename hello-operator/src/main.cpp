@@ -1,6 +1,8 @@
 #include <iostream>
 
 #include "hoperator.h"
+#include "hoperatorarr.h"
+
 
 using namespace std;
 
