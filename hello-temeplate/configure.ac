@@ -9,6 +9,8 @@ AC_CONFIG_HEADERS([config.h])
 # Checks for programs.
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 AC_PROG_CXX
+AC_LANG_PUSH([C++])
+CXXFLAGS="${CXXFLAGS} -std=c++11"
 
 # Checks for libraries.
 

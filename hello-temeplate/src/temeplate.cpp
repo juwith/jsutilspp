@@ -21,6 +21,19 @@ void MyData<T>::printData()
 	cout << "your data is : " << this->data << endl;
 }
 
+template <typename T>
+void print(T arg)
+{
+	cout << arg << endl;
+}
+
+template <typename T, typename... Types>
+void print(T arg, Types... args)
+{
+	cout << arg;
+	print(args...);
+}
+
 int main()
 {
 	cout << "heap class" << endl;
@@ -38,4 +51,7 @@ int main()
 	myd.setData('c');
 	myd.printData();
 	cout << "get data : " << myd.getData() << endl;
+
+	string str("abc");
+	print(str,123,"test");
 }
