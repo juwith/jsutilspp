@@ -2,6 +2,18 @@
 
 using namespace std;
 
+/**
+ * example template val
+ */
+template<int i>
+struct C
+{
+	enum { RES = i };
+};
+
+/**
+ * example template class
+ */
 template <typename T>
 class MyData
 {
@@ -21,6 +33,9 @@ void MyData<T>::printData()
 	cout << "your data is : " << this->data << endl;
 }
 
+/**
+ * example variadic template function
+ */
 template <typename T>
 void print(T arg)
 {
@@ -31,11 +46,13 @@ template <typename T, typename... Types>
 void print(T arg, Types... args)
 {
 	cout << arg;
-	print(args...);
+	print(args ...);
 }
 
 int main()
 {
+	cout << "C<2> is " << C<2>::RES << endl;
+
 	cout << "heap class" << endl;
 	MyData<int>* pMyd = new MyData<int>(8);
 	pMyd->printData();
@@ -54,4 +71,5 @@ int main()
 
 	string str("abc");
 	print(str,123,"test");
+
 }
