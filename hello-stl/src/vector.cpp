@@ -1,8 +1,17 @@
 #include <iostream>
 #include <vector>
 
+/**
+ * @file vector.cpp
+ * @author Jusang Maeng (jusang6900@gmail.com)
+ * @date 2020.01.29
+ * @brief vector examples
+ * @see http://www.cplusplus.com/reference/vector/vector/
+ */
+
 using namespace std;
 
+//three function below will same work.
 template <typename T>
 static void printVect(T vect)
 {
@@ -14,6 +23,30 @@ static void printVect(T vect)
 	cout << "end data of vector" << endl;
 }
 
+template <typename T>
+static void printVect_itr(T vect)
+{
+	cout << "print data of vector by iterator" << endl;
+	for (vector<int>::iterator itr = vect.begin(); itr != vect.end();++itr)
+	{
+		std::cout << *itr << std::endl;
+	}
+	cout << "end data of vector" << endl;
+}
+
+template <typename T>
+static void printVect_range(T vect)
+{
+	cout << "print data of vector by range based loop" << endl;
+	for (int elem : vect)
+	{
+		cout << elem << endl;
+		//the factor assign in every for loop. (elem = vec[i])
+	}
+	cout << "end data of vector" << endl;
+}
+
+
 int main()
 {
 	vector<int> vect;
@@ -21,6 +54,12 @@ int main()
 	vect.push_back(2);
 	vect.push_back(3);
 	vect.push_back(4);
+
+	cout << "===================print test!!" << endl;
+	printVect(vect);
+	printVect_itr(vect);
+	printVect_range(vect);
+	cout << "===================end of print test!!" << endl;
 
 	// vector is {1,2,3,4}
 	printVect(vect); 
