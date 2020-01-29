@@ -27,7 +27,7 @@ template <typename T>
 static void printVect_itr(T vect)
 {
 	cout << "print data of vector by iterator" << endl;
-	for (vector<int>::iterator itr = vect.begin(); itr != vect.end();++itr)
+	for(vector<int>::iterator itr = vect.begin(); itr != vect.end();++itr)
 	{
 		std::cout << *itr << std::endl;
 	}
@@ -38,7 +38,13 @@ template <typename T>
 static void printVect_range(T vect)
 {
 	cout << "print data of vector by range based loop" << endl;
-	for (int elem : vect)
+
+	//user also can use below style, but it will be a copy of the current array element
+	// for (int elem : vect)
+
+	//read only :
+	// for(const int &elem : vect)
+	for(int &elem : vect)
 	{
 		cout << elem << endl;
 		//the factor assign in every for loop. (elem = vec[i])
