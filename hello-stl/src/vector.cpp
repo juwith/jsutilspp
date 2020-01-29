@@ -17,29 +17,29 @@ using namespace std;
 template <typename T>
 static void printVect(T &vect)
 {
-	cout << "print data of vector" << endl;
+	cout << "elements : {";
 	for(vector<int>::size_type i = 0; i < vect.size(); i++)
 	{
-		cout << vect[i] << endl;
+		cout << vect[i] << ", ";
 	}
-	cout << "end data of vector" << endl;
+	cout << "}" << endl;
 }
 
 template <typename T>
 static void printVect_itr(T &vect)
 {
-	cout << "print data of vector by iterator" << endl;
+	cout << "iterator, elements : {";
 	for(vector<int>::iterator itr = vect.begin(); itr != vect.end();++itr)
 	{
-		std::cout << *itr << std::endl;
+		std::cout << *itr << ", ";
 	}
-	cout << "end data of vector" << endl;
+	cout << "}" << endl;
 }
 
 template <typename T>
 static void printVect_range(T &vect)
 {
-	cout << "print data of vector by range based loop" << endl;
+	cout << "range based loop, elements : {";
 
 	//user also can use below style, but it will be a copy of the current array element
 	// for (int elem : vect)
@@ -48,10 +48,10 @@ static void printVect_range(T &vect)
 	// for(const int &elem : vect)
 	for(int &elem : vect)
 	{
-		cout << elem << endl;
+		cout << elem << ", ";
 		//the factor assign in every for loop. (elem = vec[i])
 	}
-	cout << "end data of vector" << endl;
+	cout << "}" << endl;
 }
 
 
@@ -69,24 +69,28 @@ int main()
 	printVect_range(vect);
 	cout << "===================end of print test!!" << endl;
 
-	// vector is {1,2,3,4}
-	printVect(vect); 
+	cout << "pop back" << endl;
 	vect.pop_back(); // pop : 4 , vector is {1,2,3}
-
 	printVect(vect);
 
 	cout << "vect.at(1) : " << vect.at(1) << endl; // vector is {1,2,3}, at(0) 1, at(1) 2, ...
 	cout << "vect front : " << vect.front() << endl; // vector is {1,2,3}, front() is 1
 	cout << "vect back : " << vect.back() << endl; // vector is {1,2,3}, back() is 3
 
+	cout << "insert 50 at first" << endl;
 	vect.insert(vect.begin(),50); // insert 50, vector is {50, 1,2,3}
+	printVect(vect);
+	cout << "erase end" << endl;
 	vect.erase(vect.end()-1); // earse last, vector is {50, 1,2}
 	printVect(vect);
 	
-
+	cout << "swap with 11,12,13" << endl;
 	vector<int> vect2 = {11,12,13}; // vect is {50,1,2}, vect2 is {11,12,13}
 	vect.swap(vect2); // vect is {11,12,13}, vect2 is {50,1,2}
+
+	cout << "swaped elements";
 	printVect(vect);
+	cout << "original elements";
 	printVect(vect2);
 
 	return 0;
