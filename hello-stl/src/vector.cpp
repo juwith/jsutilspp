@@ -12,8 +12,10 @@
 using namespace std;
 
 //three function below will same work.
+//printVect(T &vect) is also possible, but memory will copy every using.
+//that's why use '&(address)'
 template <typename T>
-static void printVect(T vect)
+static void printVect(T &vect)
 {
 	cout << "print data of vector" << endl;
 	for(vector<int>::size_type i = 0; i < vect.size(); i++)
@@ -24,7 +26,7 @@ static void printVect(T vect)
 }
 
 template <typename T>
-static void printVect_itr(T vect)
+static void printVect_itr(T &vect)
 {
 	cout << "print data of vector by iterator" << endl;
 	for(vector<int>::iterator itr = vect.begin(); itr != vect.end();++itr)
@@ -35,7 +37,7 @@ static void printVect_itr(T vect)
 }
 
 template <typename T>
-static void printVect_range(T vect)
+static void printVect_range(T &vect)
 {
 	cout << "print data of vector by range based loop" << endl;
 
