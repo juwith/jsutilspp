@@ -12,10 +12,10 @@
 using namespace std;
 
 template <typename T>
-static void printDq(T &dq)
+static void printDq(deque<T> &dq)
 {
 	cout << "elements : {";
-	for(deque<int>::size_type i = 0; i < dq.size(); i++)
+	for(typename deque<T>::size_type i = 0; i < dq.size(); i++)
 	{
 		cout << dq[i] << ", ";
 	}
@@ -23,21 +23,21 @@ static void printDq(T &dq)
 }
 
 template <typename T>
-static void printDq_itr(T &dq)
+static void printDq_itr(deque<T> &dq)
 {
 	cout << "iterator, elements : {";
-	for(deque<int>::iterator itr = dq.begin(); itr != dq.end();++itr)
+	for(typename deque<T>::iterator itr = dq.begin(); itr != dq.end();++itr)
 	{
-		std::cout << *itr << ", ";
+		cout << *itr << ", ";
 	}
 	cout << "}" << endl;
 }
 
 template <typename T>
-static void printDq_range(T &dq)
+static void printDq_range(deque<T> &dq)
 {
 	cout << "range based loop, elements : {";
-	for (int elem : dq)
+	for (const auto& elem : dq)
 	{
 		cout << elem << ", ";
 	}

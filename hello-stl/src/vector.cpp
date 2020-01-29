@@ -15,10 +15,10 @@ using namespace std;
 //printVect(T &vect) is also possible, but memory will copy every using.
 //that's why use '&(address)'
 template <typename T>
-static void printVect(T &vect)
+static void printVect(vector<T> &vect)
 {
 	cout << "elements : {";
-	for(vector<int>::size_type i = 0; i < vect.size(); i++)
+	for(typename vector<T>::size_type i = 0; i < vect.size(); i++)
 	{
 		cout << vect[i] << ", ";
 	}
@@ -26,18 +26,18 @@ static void printVect(T &vect)
 }
 
 template <typename T>
-static void printVect_itr(T &vect)
+static void printVect_itr(vector<T> &vect)
 {
 	cout << "iterator, elements : {";
-	for(vector<int>::iterator itr = vect.begin(); itr != vect.end();++itr)
+	for(typename vector<T>::iterator itr = vect.begin(); itr != vect.end();++itr)
 	{
-		std::cout << *itr << ", ";
+		cout << *itr << ", ";
 	}
 	cout << "}" << endl;
 }
 
 template <typename T>
-static void printVect_range(T &vect)
+static void printVect_range(vector<T> &vect)
 {
 	cout << "range based loop, elements : {";
 
@@ -45,8 +45,8 @@ static void printVect_range(T &vect)
 	// for (int elem : vect)
 
 	//read only :
-	// for(const int &elem : vect)
-	for(int &elem : vect)
+	// for(const auto &elem : vect)
+	for(const auto &elem : vect)
 	{
 		cout << elem << ", ";
 		//the factor assign in every for loop. (elem = vec[i])

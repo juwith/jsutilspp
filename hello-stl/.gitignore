@@ -35,6 +35,7 @@ stamp-h1
 # add user
 vector
 deque
+list
 config.guess
 config.sub
 
