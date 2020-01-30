@@ -36,6 +36,8 @@ stamp-h1
 vector
 deque
 list
+set
+map
 config.guess
 config.sub
 
