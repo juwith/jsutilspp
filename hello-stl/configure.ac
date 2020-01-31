@@ -21,5 +21,6 @@ CXXFLAGS="${CXXFLAGS} -std=c++11"
 # Checks for library functions.
 
 AC_CONFIG_FILES([Makefile
-                 container/Makefile])
+                 container/Makefile
+                 algorithm/Makefile])
 AC_OUTPUT
