@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.69])
 AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
-AC_CONFIG_SRCDIR([src])
+AC_CONFIG_SRCDIR([container])
 AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
@@ -21,5 +21,5 @@ CXXFLAGS="${CXXFLAGS} -std=c++11"
 # Checks for library functions.
 
 AC_CONFIG_FILES([Makefile
-                 src/Makefile])
+                 container/Makefile])
 AC_OUTPUT
