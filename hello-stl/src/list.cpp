@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <string>
 
 /**
  * @file list.cpp

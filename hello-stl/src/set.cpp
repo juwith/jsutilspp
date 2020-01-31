@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <string>
 
 /**
  * @file set.cpp
@@ -42,6 +43,8 @@ int main()
 	si.insert(3);
 	si.insert(2);
 	si.insert(4);
+	si.insert(1); //ignore duplicated in set
+	si.insert(1); //ignore duplicated in set
 
 	cout << "===================print test!!" << endl;
 	printSet_itr(si);
@@ -76,6 +79,8 @@ int main()
 	ss.insert("melon");
 	ss.insert("apple");
 	ss.insert("banana");
+	ss.insert("banana"); //ignore duplicated in set
+	ss.insert("banana"); //ignore duplicated in set
 	printSet_range(ss);
 
 	cout<< "find element! 'melon'" << endl;

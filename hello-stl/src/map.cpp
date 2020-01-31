@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <string>
 
 /**
  * @file map.cpp
