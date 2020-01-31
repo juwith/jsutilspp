@@ -57,6 +57,10 @@ static void printVect_range(vector<T> &vect)
 
 int main()
 {
+	int myiarr[] = {5,3,2,6,7,9};
+	vector<int> first(myiarr, myiarr+3); // 0~2 array, {5,3,2}
+	printVect(first);
+
 	vector<int> vect;
 	vect.push_back(1);
 	vect.push_back(2);
