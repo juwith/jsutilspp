@@ -26,6 +26,7 @@ static void printVect(vector<T> &vect)
 bool isOdd(int i) { return ((i%2)==1); }
 int main()
 {
+	//example 1. sort
 	int myints[] = {32,71,12,45,26,80,53,33};
 	vector<int> myvector(myints, myints+8);
 	printVect(myvector);
@@ -39,6 +40,7 @@ int main()
 	printVect(myvector);
 
 
+	//example 2. remove and erase
 	vector<int> vect;
 	vect.push_back(20);
 	vect.push_back(10);
@@ -52,7 +54,7 @@ int main()
 	vect.erase(remove(vect.begin(), vect.end(), 10), vect.end());
 	printVect(vect);
 
-
+	//example 3. remove condition and erase
 	vector<int> vect2;
 	vect2.push_back(5);
 	vect2.push_back(7);
@@ -65,7 +67,7 @@ int main()
 	vect2.erase(remove_if(vect2.begin(), vect2.end(), isOdd), vect2.end());
 	printVect(vect2);
 
-
+	//example 4. find lower
 	int intarr[] = {7,3,4,1,2,3,4,6,7,8,9};
 	int narr = sizeof(intarr)/sizeof(int);
 	vector<int> vect3(intarr,intarr+narr);
@@ -79,9 +81,31 @@ int main()
 	cout << "low " << *low <<endl; //it can't find key value(5). it will find 6 instead of 5.
 
 
+	//example 5. partition
 	vector<int>::iterator findvect;
 	findvect = find(vect3.begin(), vect3.end(), 8);
 	cout << "find 8 : " << *findvect << endl;
+	findvect = find(vect3.begin(), vect3.end(), 5);
+	cout << "find 5 : " << *findvect << endl;
 
+	vector<int>::iterator parti;
+	cout << "partition odd / event" << endl;
+	parti = partition(vect3.begin(), vect3.end(),isOdd);
+	printVect(vect3);
+
+	cout << "odd elements are :";
+	for(vector<int>::iterator it1 = vect3.begin(); it1 < parti; it1++)
+	{
+		cout << *it1 << ", ";
+	}
+	cout << endl;
+
+	cout << "even elements are :";
+	for(vector<int>::iterator it1 = parti; it1 < vect3.end(); it1++)
+	{
+		cout << *it1 << ", ";
+	}
+	cout << endl;
+	
 	return 0;
 }
