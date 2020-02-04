@@ -60,11 +60,12 @@ int main()
 	vect2.push_back(7);
 	vect2.push_back(4);
 	vect2.push_back(8);
-	vect.push_back(13);
+	vect2.push_back(13);
 	cout << "new vector" << endl;
 	printVect(vect2);
 	cout << "algorithm remove odd" <<endl;
-	vect2.erase(remove_if(vect2.begin(), vect2.end(), isOdd), vect2.end());
+	//lambda function. it is same with "bool isOdd(int i) { return ((i%2)==1); }"
+	vect2.erase(remove_if(vect2.begin(), vect2.end(), [](int i)->bool{return ((i%2)==1);}), vect2.end());
 	printVect(vect2);
 
 	//example 4. find lower
