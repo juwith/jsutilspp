@@ -20,10 +20,15 @@ private:
 public:
 	lcrs* createNode(int index, void* item);
 	void addNode(lcrs* parent, lcrs* child);
-	void printinfo(lcrs* node);
 	lcrs* getroot();
 	lcrs* findNode(lcrs* node, int index);
 	void removeTree(lcrs* node);
+
+//extention
+	void printinfo(lcrs* node);
+	lcrs* userSum(lcrs* node, int index, int* sum);
+
+//creator,destructor
 	LCRS_tree();
 	~LCRS_tree();
 };
@@ -62,21 +67,6 @@ void LCRS_tree::addNode(lcrs* parent, lcrs* child)
 	}
 }
 
-void LCRS_tree::printinfo(lcrs* node)
-{
-	if(node->leftchild) {
-		printinfo(node->leftchild);
-		cout << endl;
-	}
-
-	if(node->rightsibling) {
-		printinfo(node->rightsibling);
-	}
-
-	cout << node->index << ", ";
-}
-
-
 lcrs* LCRS_tree::getroot()
 {
 	return mlcrs;
@@ -101,7 +91,6 @@ lcrs* LCRS_tree::findNode(lcrs* node, int index)
 		if(mynode) return mynode;
 	}
 }
-
 
 void LCRS_tree::removeTree(lcrs* node)
 {
@@ -134,6 +123,51 @@ LCRS_tree::~LCRS_tree()
 {
 	removeTree(mlcrs);
 }
+
+
+void LCRS_tree::printinfo(lcrs* node)
+{
+	if(node->leftchild) {
+		printinfo(node->leftchild);
+		cout << endl;
+	}
+
+	if(node->rightsibling) {
+		printinfo(node->rightsibling);
+	}
+
+	int* myitem = (int*)node->item;
+	cout << node->index << ":item(" << *(string*)myitem << ")    ,";
+}
+
+lcrs* LCRS_tree::userSum(lcrs* node, int index, int* sum)
+{
+	if(node == NULL) return NULL;
+
+	if(node->index == index) {
+		//break;
+		string item = *(string*)node->item;
+		*sum += item.size();
+		return node;
+	}
+
+	if(node->leftchild) {
+		lcrs* mynode = userSum(node->leftchild,index,sum);
+		if(mynode) {
+			string item = *(string*)node->item;
+			*sum += item.size();
+			return mynode;
+		}
+	}
+
+	if(node->rightsibling) {
+		lcrs* mynode = userSum(node->rightsibling,index,sum);
+		if(mynode) {
+			return mynode;
+		}
+	}
+}
+
 
 
 int main()
@@ -182,34 +216,47 @@ int main()
 		{7,10},
 	};
 
+	int itemsize = sizeof(myarr)/sizeof(myarr[0])+1;
+	string myitem[itemsize] = {"root","usr","bin","lib","mydata","etc","hello","abc","ccc","dev","tmp"};
+
 	lcrs* root = NULL;
 	for(int i=0;i<sizeof(myarr)/sizeof(myarr[0]);i++) {
 		//myarr[i][0] <= parent
 		//myarr[i][1] <= child
 		lcrs* parent = tree.findNode(root, myarr[i][0]);
 		if(parent == NULL) {
-			parent = tree.createNode(myarr[i][0],NULL);
+			parent = tree.createNode(myarr[i][0],(void*)&myitem[0]);
 			tree.addNode(root,parent);
 			root = parent;
 		}
-
-		lcrs* child = tree.createNode(myarr[i][1],NULL);
+		int numofitem = myarr[i][1]-1;
+		lcrs* child = tree.createNode(myarr[i][1],(void*)&myitem[numofitem]);
 
 		tree.addNode(parent,child);
 	}
 	// result :
-	// 1
+	// 1(root)
 	// |
-	// 2 - 3 - 4
+	// 2(usr) - 3(bin) - 4(lib)
 	// |
-	// 5 - 6 - 7
-	//     |   |
-	//    11   8 - 9 - 10
+	// 5(mydata) - 6(etc) - 7(hello)
+	//     |                   |
+	//    11(abc)   8(ccc) - 9(dev) - 10(tmp)
 
-
+	//calculate accumluated val
 	cout << "====tree=====" << endl;
 	tree.printinfo(root);
 	cout << endl << "====eof=====" << endl;
-	
+
+	int max=0;
+	for(int i=1;i<sizeof(myarr)/sizeof(myarr[0])+2;i++) {
+		int sum = 0;
+		tree.userSum(root,i,&sum);
+		cout << "calculate sum : " << i << "=" << sum << endl;
+		if(max < sum) max=sum;
+	}
+
+	cout << "max sum : " << max << endl;
+
 	return 0;
 }
