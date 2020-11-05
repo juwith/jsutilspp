@@ -136,9 +136,9 @@ void LCRS_tree::printinfo(lcrs* node)
 		printinfo(node->rightsibling);
 	}
 
-	int* myitem = (int*)node->item;
-	cout << node->index << ":item(" << *(string*)myitem << ")    ,";
+	cout << node->index << ":item(" << *(string*)node->item << ")    ,";
 }
+
 
 lcrs* LCRS_tree::userSum(lcrs* node, int index, int* sum)
 {
@@ -249,10 +249,10 @@ int main()
 	cout << endl << "====eof=====" << endl;
 
 	int max=0;
-	for(int i=1;i<sizeof(myarr)/sizeof(myarr[0])+2;i++) {
+	for(int i=1;i<itemsize+1;i++) {
 		int sum = 0;
 		tree.userSum(root,i,&sum);
-		cout << "calculate sum : " << i << "=" << sum << endl;
+		cout << "index " << i << " sum of string size : " << sum << endl;
 		if(max < sum) max=sum;
 	}
 
