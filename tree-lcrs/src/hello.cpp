@@ -18,155 +18,137 @@ class LCRS_tree
 private:
 	lcrs* mlcrs;
 public:
-	lcrs* createNode(int index, void* item);
-	void addNode(lcrs* parent, lcrs* child);
-	lcrs* getroot();
-	lcrs* findNode(lcrs* node, int index);
-	void removeTree(lcrs* node);
+	lcrs* createNode(int index, void* item)
+	{
+		lcrs* newnode;
+	
+		newnode = new lcrs;
+		newnode->index = index;
+		newnode->item = item;
+		newnode->leftchild = NULL;
+		newnode->rightsibling = NULL;
+		return newnode;
+	}
+
+	void addNode(lcrs* parent, lcrs* child)
+	{
+		if(mlcrs == NULL) {
+			mlcrs = child;
+			cout << "create root" << endl;
+			return;
+		}
+
+		if(parent->leftchild == NULL) {
+			parent->leftchild = child;
+			//cout << "add left" << endl;
+		} else {
+			lcrs* mchild = parent->leftchild;
+			while(mchild->rightsibling != NULL) {
+				mchild = mchild->rightsibling;
+			}
+			mchild->rightsibling = child;
+			//cout << "add right" << endl;
+		}
+	}
+
+	lcrs* getroot()
+	{
+		return mlcrs;
+	}
+
+	lcrs* findNode(lcrs* node, int index)
+	{
+		if(node == NULL) return NULL;
+
+		if(node->index == index) {
+			//break;
+			return node;
+		}
+
+		if(node->leftchild) {
+			lcrs* mynode = findNode(node->leftchild,index);
+			if(mynode) return mynode;
+		}
+
+		if(node->rightsibling) {
+			lcrs* mynode = findNode(node->rightsibling,index);
+			if(mynode) return mynode;
+		}
+	}
+
+	void removeTree(lcrs* node)
+	{
+		if(node->rightsibling) {
+			removeTree(node->rightsibling);
+			//cout << "right" << endl;
+		}
+	
+		if(node->leftchild) {
+			removeTree(node->leftchild);
+			//cout << "left" << endl;
+		}
+	
+		node->rightsibling = NULL;
+		node->leftchild = NULL;
+		//cout << "remove" << endl;
+	
+		delete node;
+		node = NULL;
+	}
 
 //extention
-	void printinfo(lcrs* node);
-	lcrs* userSum(lcrs* node, int index, int* sum);
-
-//creator,destructor
-	LCRS_tree();
-	~LCRS_tree();
-};
-
-lcrs* LCRS_tree::createNode(int index, void* item)
-{
-	lcrs* newnode;
-
-	newnode = new lcrs;
-	newnode->index = index;
-	newnode->item = item;
-	newnode->leftchild = NULL;
-	newnode->rightsibling = NULL;
-	return newnode;
-}
-
-
-void LCRS_tree::addNode(lcrs* parent, lcrs* child)
-{
-	if(mlcrs == NULL) {
-		mlcrs = child;
-		cout << "create root" << endl;
-		return;
-	}
-
-	if(parent->leftchild == NULL) {
-		parent->leftchild = child;
-		//cout << "add left" << endl;
-	} else {
-		lcrs* mchild = parent->leftchild;
-		while(mchild->rightsibling != NULL) {
-			mchild = mchild->rightsibling;
+	void printinfo(lcrs* node)
+	{
+		if(node->leftchild) {
+			printinfo(node->leftchild);
+			cout << endl;
 		}
-		mchild->rightsibling = child;
-		//cout << "add right" << endl;
+	
+		if(node->rightsibling) {
+			printinfo(node->rightsibling);
+		}
+	
+		cout << node->index << ":item(" << *(string*)node->item << ")	 ,";
 	}
-}
-
-lcrs* LCRS_tree::getroot()
-{
-	return mlcrs;
-}
-
-lcrs* LCRS_tree::findNode(lcrs* node, int index)
-{
-	if(node == NULL) return NULL;
-
-	if(node->index == index) {
-		//break;
-		return node;
-	}
-
-	if(node->leftchild) {
-		lcrs* mynode = findNode(node->leftchild,index);
-		if(mynode) return mynode;
-	}
-
-	if(node->rightsibling) {
-		lcrs* mynode = findNode(node->rightsibling,index);
-		if(mynode) return mynode;
-	}
-}
-
-void LCRS_tree::removeTree(lcrs* node)
-{
-	if(node->rightsibling) {
-		removeTree(node->rightsibling);
-		//cout << "right" << endl;
-	}
-
-	if(node->leftchild) {
-		removeTree(node->leftchild);
-		//cout << "left" << endl;
-	}
-
-	node->rightsibling = NULL;
-	node->leftchild = NULL;
-	//cout << "remove" << endl;
-
-	delete node;
-	node = NULL;
-}
-
-
-LCRS_tree::LCRS_tree()
-{
-	mlcrs = NULL;
-}
-
-
-LCRS_tree::~LCRS_tree()
-{
-	removeTree(mlcrs);
-}
-
-
-void LCRS_tree::printinfo(lcrs* node)
-{
-	if(node->leftchild) {
-		printinfo(node->leftchild);
-		cout << endl;
-	}
-
-	if(node->rightsibling) {
-		printinfo(node->rightsibling);
-	}
-
-	cout << node->index << ":item(" << *(string*)node->item << ")    ,";
-}
-
-
-lcrs* LCRS_tree::userSum(lcrs* node, int index, int* sum)
-{
-	if(node == NULL) return NULL;
-
-	if(node->index == index) {
-		//break;
-		string item = *(string*)node->item;
-		*sum += item.size();
-		return node;
-	}
-
-	if(node->leftchild) {
-		lcrs* mynode = userSum(node->leftchild,index,sum);
-		if(mynode) {
+	lcrs* userSum(lcrs* node, int index, int* sum)
+	{
+		if(node == NULL) return NULL;
+	
+		if(node->index == index) {
+			//break;
 			string item = *(string*)node->item;
 			*sum += item.size();
-			return mynode;
+			return node;
+		}
+	
+		if(node->leftchild) {
+			lcrs* mynode = userSum(node->leftchild,index,sum);
+			if(mynode) {
+				string item = *(string*)node->item;
+				*sum += item.size();
+				return mynode;
+			}
+		}
+	
+		if(node->rightsibling) {
+			lcrs* mynode = userSum(node->rightsibling,index,sum);
+			if(mynode) {
+				return mynode;
+			}
 		}
 	}
 
-	if(node->rightsibling) {
-		lcrs* mynode = userSum(node->rightsibling,index,sum);
-		if(mynode) {
-			return mynode;
-		}
+//creator,destructor
+	LCRS_tree()
+	{
+		mlcrs = NULL;
 	}
-}
+	~LCRS_tree()
+	{
+		removeTree(mlcrs);
+	}
+	
+};
 
 
 
