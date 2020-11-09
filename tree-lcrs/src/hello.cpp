@@ -5,24 +5,25 @@
 
 using namespace std;
 
-typedef struct lcrs {
-	lcrs* leftchild;
-	lcrs* rightsibling;
+template <typename T>
+struct lcrs {
+	struct lcrs<T> *leftchild;
+	struct lcrs<T> *rightsibling;
 	int index;
-	void* item;
-} lcrs;
+	T item;
+};
 
-
+template <typename T>
 class LCRS_tree
 {
 private:
-	lcrs* mlcrs;
+	lcrs<T> *mlcrs;
 public:
-	lcrs* createNode(int index, void* item)
+	lcrs<T>* createNode(int index, T item)
 	{
-		lcrs* newnode;
+		lcrs<T> *newnode;
 	
-		newnode = new lcrs;
+		newnode = new lcrs<T>;
 		newnode->index = index;
 		newnode->item = item;
 		newnode->leftchild = NULL;
@@ -30,7 +31,7 @@ public:
 		return newnode;
 	}
 
-	void addNode(lcrs* parent, lcrs* child)
+	void addNode(lcrs<T>* parent, lcrs<T>* child)
 	{
 		if(mlcrs == NULL) {
 			mlcrs = child;
@@ -42,7 +43,7 @@ public:
 			parent->leftchild = child;
 			//cout << "add left" << endl;
 		} else {
-			lcrs* mchild = parent->leftchild;
+			lcrs<T>* mchild = parent->leftchild;
 			while(mchild->rightsibling != NULL) {
 				mchild = mchild->rightsibling;
 			}
@@ -51,12 +52,12 @@ public:
 		}
 	}
 
-	lcrs* getroot()
+	lcrs<T>* getroot()
 	{
 		return mlcrs;
 	}
 
-	lcrs* findNode(lcrs* node, int index)
+	lcrs<T>* findNode(lcrs<T>* node, int index)
 	{
 		if(node == NULL) return NULL;
 
@@ -66,17 +67,17 @@ public:
 		}
 
 		if(node->leftchild) {
-			lcrs* mynode = findNode(node->leftchild,index);
+			lcrs<T>* mynode = findNode(node->leftchild,index);
 			if(mynode) return mynode;
 		}
 
 		if(node->rightsibling) {
-			lcrs* mynode = findNode(node->rightsibling,index);
+			lcrs<T>* mynode = findNode(node->rightsibling,index);
 			if(mynode) return mynode;
 		}
 	}
 
-	void removeTree(lcrs* node)
+	void removeTree(lcrs<T>* node)
 	{
 		if(node->rightsibling) {
 			removeTree(node->rightsibling);
@@ -97,7 +98,7 @@ public:
 	}
 
 //extention
-	void printinfo(lcrs* node)
+	void printinfo(lcrs<T>* node)
 	{
 		if(node->leftchild) {
 			printinfo(node->leftchild);
@@ -108,30 +109,30 @@ public:
 			printinfo(node->rightsibling);
 		}
 	
-		cout << node->index << ":item(" << *(string*)node->item << ")	 ,";
+		cout << node->index << ":item(" << node->item << ")	 ,";
 	}
-	lcrs* userSum(lcrs* node, int index, int* sum)
+	lcrs<T>* userSum(lcrs<T>* node, int index, int* sum)
 	{
 		if(node == NULL) return NULL;
 	
 		if(node->index == index) {
 			//break;
-			string item = *(string*)node->item;
+			T item = node->item;
 			*sum += item.size();
 			return node;
 		}
 	
 		if(node->leftchild) {
-			lcrs* mynode = userSum(node->leftchild,index,sum);
+			lcrs<T>* mynode = userSum(node->leftchild,index,sum);
 			if(mynode) {
-				string item = *(string*)node->item;
+				T item = node->item;
 				*sum += item.size();
 				return mynode;
 			}
 		}
 	
 		if(node->rightsibling) {
-			lcrs* mynode = userSum(node->rightsibling,index,sum);
+			lcrs<T>* mynode = userSum(node->rightsibling,index,sum);
 			if(mynode) {
 				return mynode;
 			}
@@ -154,7 +155,7 @@ public:
 
 int main()
 {
-	LCRS_tree tree;
+	LCRS_tree<string> tree;
 /*
 
 	lcrs* root = tree.createNode(1,NULL);
@@ -201,18 +202,18 @@ int main()
 	int itemsize = sizeof(myarr)/sizeof(myarr[0])+1;
 	string myitem[itemsize] = {"root","usr","bin","lib","mydata","etc","hello","abc","ccc","dev","tmp"};
 
-	lcrs* root = NULL;
+	lcrs<string> *root = NULL;
 	for(int i=0;i<sizeof(myarr)/sizeof(myarr[0]);i++) {
 		//myarr[i][0] <= parent
 		//myarr[i][1] <= child
-		lcrs* parent = tree.findNode(root, myarr[i][0]);
+		lcrs<string> *parent = tree.findNode(root, myarr[i][0]);
 		if(parent == NULL) {
-			parent = tree.createNode(myarr[i][0],(void*)&myitem[0]);
+			parent = tree.createNode(myarr[i][0],myitem[0]);
 			tree.addNode(root,parent);
 			root = parent;
 		}
 		int numofitem = myarr[i][1]-1;
-		lcrs* child = tree.createNode(myarr[i][1],(void*)&myitem[numofitem]);
+		lcrs<string> *child = tree.createNode(myarr[i][1],myitem[numofitem]);
 
 		tree.addNode(parent,child);
 	}
