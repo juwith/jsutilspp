@@ -1,3 +1,3 @@
-bin_PROGRAMS = hellopp
+bin_PROGRAMS = lcrstree
 
-hellopp_SOURCES = hello.cpp
+lcrstree_SOURCES = lcrstree.cpp
