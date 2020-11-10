@@ -51,6 +51,33 @@ public:
 		return node;
 	}
 
+	Node<T>* findNode(T item)
+	{
+		findNode(mNode,item);
+	}
+
+	Node<T>* findNode(Node<T>* node, T item)
+	{
+		if(node == NULL) return NULL;
+
+		if(node->item == item) {
+			//break;
+			return node;
+		}
+
+		if(node->left) {
+			Node<T>* mynode = findNode(node->left,item);
+			if(mynode) return mynode;
+		}
+
+		if(node->right) {
+			Node<T>* mynode = findNode(node->right,item);
+			if(mynode) return mynode;
+		}
+
+		return NULL;
+	}
+
 	Node<T>* getroot()
 	{
 		return mNode;
@@ -174,6 +201,11 @@ int main()
 	cout << "post order : {";
 	mytree.postOrder();
 	cout << "}" << endl;
+
+	Node<int>* mynode = mytree.findNode(5);
+	if(mynode) {
+		cout << "found my node:	" << mynode->item << endl;
+	}
 
 	return 0;
 }

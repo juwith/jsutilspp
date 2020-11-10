@@ -75,6 +75,8 @@ public:
 			lcrs<T>* mynode = findNode(node->rightsibling,index);
 			if(mynode) return mynode;
 		}
+
+		return NULL;
 	}
 
 	void removeTree(lcrs<T>* node)
