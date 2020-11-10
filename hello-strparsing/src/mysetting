@@ -1,2 +1,5 @@
-# my:age=30
-my:name=jusang
+audio:volume=30
+audio:mute=0
+video:resolution=5
+video:version=14
+
