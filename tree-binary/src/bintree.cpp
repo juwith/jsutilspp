@@ -156,6 +156,23 @@ public:
 		cout << ":item(" << node->item << ")	 ,";
 	}
 
+	void printTree()
+	{
+		printTree(mNode, 0);
+	}
+
+	void printTree(Node<T> *node, int space){
+		if (node == NULL)
+			return;
+
+		space += 4; //number of spaces
+		printTree(node->right, space);
+		for (int i = 4; i < space; i++) //number of spaces
+			cout << " ";
+		cout << node->item << endl;
+		printTree(node->left, space);
+	}
+
 
 //creator,destructor
 	Bin_tree()
@@ -166,7 +183,6 @@ public:
 	{
 		removeTree(mNode);
 	}
-	
 };
 
 int main()
@@ -206,6 +222,10 @@ int main()
 	if(mynode) {
 		cout << "found my node:	" << mynode->item << endl;
 	}
+
+	cout << "==========print Tree(horizontally)===========" << endl;
+	mytree.printTree();
+	cout << "=============================================" << endl;
 
 	return 0;
 }
