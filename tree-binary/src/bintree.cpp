@@ -83,6 +83,57 @@ public:
 		return mNode;
 	}
 
+	Node<T>* findMinNode(Node<T>* node)
+	{
+		if(node == NULL)
+			return NULL;
+
+		if(node->left == NULL) {
+			return node;
+		}
+
+		cout << "min is " << node->item <<endl;
+		return findMinNode(node->left);
+	}
+
+	Node<T>* removeNode(T item)
+	{
+		removeNode(mNode,item);
+	}
+
+	Node<T>* removeNode(Node<T>* node, T item)
+	{
+		Node<T>* temp;
+		if(node == NULL) {
+			return NULL;
+		}
+
+		if(node->item > item) {
+			node->left = removeNode(node->left,item);
+			return node;
+		} else if(node->item < item) {
+			node->right = removeNode(node->right,item);
+			return node;
+		}
+
+		if(node->left && node->right) {
+			temp = findMinNode(node->right);
+			node->item = temp->item;
+			node->right = removeNode(node->right,node->item);
+		} else {
+			temp = node;
+			if(node->left == NULL) {
+				node = node->right;
+			} else if(node->right == NULL) {
+				node = node->left;
+			}
+			delete temp;
+			temp = NULL;
+		}
+
+		return node;
+	}
+
 	void removeTree(Node<T>* node)
 	{
 		if(node->right) {
@@ -224,6 +275,21 @@ int main()
 	}
 
 	cout << "==========print Tree(horizontally)===========" << endl;
+	mytree.printTree();
+	cout << "=============================================" << endl;
+
+	cout << "===remove \"5 \" print Tree(horizontally)====" << endl;
+	mytree.removeNode(5);
+	mytree.printTree();
+	cout << "=============================================" << endl;
+
+	cout << "===remove \"14 \" print Tree(horizontally)====" << endl;
+	mytree.removeNode(14);
+	mytree.printTree();
+	cout << "=============================================" << endl;
+
+	cout << "===remove \"24 \" print Tree(horizontally)====" << endl;
+	mytree.removeNode(24);
 	mytree.printTree();
 	cout << "=============================================" << endl;
 
