@@ -38,7 +38,7 @@ public:
 		int x = array.front();
 		int parent=1, child=2;
 		int arrSize = array.size();
-		while(child < arrSize) {
+		while(child <= arrSize) {
 			if(array[child-1] < array[child]) {
 				child++;
 			}
@@ -112,8 +112,8 @@ public:
 		if(array.empty())
 			return -1;
 
-		//max is always first factor by heapify(insert)
-		int max = array.front();
+		//min is always first factor by heapify(insert)
+		int min = array.front();
 
 		//end factor moves to first factor
 		array.front() = array.back();
@@ -123,7 +123,7 @@ public:
 		int x = array.front();
 		int parent=1, child=2;
 		int arrSize = array.size();
-		while(child < arrSize) {
+		while(child <= arrSize) {
 			if(array[child-1] > array[child]) {
 				child++;
 			}
@@ -136,7 +136,7 @@ public:
 		}
 		array[parent-1] = x;
 
-		return max;
+		return min;
 	}
 
 	bool isEmpty()
@@ -212,15 +212,11 @@ int main()
 
 ///////////////min sort
 
+	int a[] = {10,5,20,3,4,100,120,130};
 	MinHeap minheap;
-	minheap.insert(10);
-	minheap.insert(5);
-	minheap.insert(20);
-	minheap.insert(3);
-	minheap.insert(4);
-	minheap.insert(100);
-	minheap.insert(120);
-	minheap.insert(130);
+	for(int i=0; i<sizeof(a)/sizeof(int);i++) {
+		minheap.insert(a[i]);
+	}
 	cout << "--------------tree-------------" << endl;
 	minheap.printtree(1,0);
 	cout << "-------------------------------" << endl;
