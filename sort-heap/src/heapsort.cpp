@@ -24,9 +24,6 @@ public:
 
 	int popMax()
 	{
-		if(array.empty())
-			return -1;
-
 		//max is always first factor by heapify(insert)
 		int max = array.front();
 
@@ -54,11 +51,23 @@ public:
 		return max;
 	}
 
+	int getMax()
+	{
+		//max is always first factor by heapify(insert)
+		return array.front();
+	}
+
+
 	bool isEmpty()
 	{
 		if(array.empty())
 			return true;
 		return false;
+	}
+
+	int factorSize()
+	{
+		return array.size();
 	}
 
 	void print()
@@ -109,9 +118,6 @@ public:
 
 	int popMin()
 	{
-		if(array.empty())
-			return -1;
-
 		//min is always first factor by heapify(insert)
 		int min = array.front();
 
@@ -139,11 +145,23 @@ public:
 		return min;
 	}
 
+	int getMin()
+	{
+		//min is always first factor by heapify(insert)
+		return array.front();
+	}
+
+
 	bool isEmpty()
 	{
 		if(array.empty())
 			return true;
 		return false;
+	}
+
+	int factorSize()
+	{
+		return array.size();
 	}
 
 	void print()
