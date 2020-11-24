@@ -215,7 +215,7 @@ int main()
 	myheap.insert(60,"red");
 	myheap.insert(18,"blue");
 	myheap.insert(100,"yello");
-	myheap.insert(7,"while");
+	myheap.insert(7,"white");
 	myheap.insert(1,"black");
 	myheap.insert(280,"pink");
 	myheap.insert(32,"green");
@@ -254,7 +254,7 @@ int main()
 		make_pair(10,"red"),
 		make_pair(5,"blue"),
 		make_pair(20,"yello"),
-		make_pair(3,"while"),
+		make_pair(3,"white"),
 		make_pair(4,"black"),
 		make_pair(100,"pink"),
 		make_pair(120,"green"),
