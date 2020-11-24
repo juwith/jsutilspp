@@ -11,7 +11,7 @@ public:
 	MaxHeap() {}
 	void insert(int x, T item)
 	{
-		array.push_back(pair<int, string>(x, item));
+		array.push_back(pair<int, T>(x, item));
 		int target = array.size();
 		while( target > 1 && x > array[(target/2)-1].first) {
 			array[target-1].first = array[(target/2)-1].first;
@@ -80,7 +80,7 @@ public:
 	void print()
 	{
 		cout << endl << "=============print=============" << endl;
-		vector<pair<int, string> >::iterator iter;
+		typename vector<pair<int, T> >::iterator iter;
 		for(iter = array.begin(); iter != array.end(); iter++){
 			cout<<iter->first << "(" << iter->second << ")" << " ";
 		}
@@ -114,7 +114,7 @@ public:
 	MinHeap() {}
 	void insert(int x, T item)
 	{
-		array.push_back(pair<int, string>(x, item));
+		array.push_back(pair<int, T>(x, item));
 		int target = array.size();
 		while( target > 1 && x < array[(target/2)-1].first) {
 			array[target-1].first = array[(target/2)-1].first;
@@ -183,7 +183,7 @@ public:
 	void print()
 	{
 		cout << endl << "=============print=============" << endl;
-		vector<pair<int, string> >::iterator iter;
+		typename vector<pair<int, T> >::iterator iter;
 		for(iter = array.begin(); iter != array.end(); iter++){
 			cout<<iter->first << "(" << iter->second << ")" << " ";
 		}
