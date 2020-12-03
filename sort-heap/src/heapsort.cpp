@@ -94,6 +94,11 @@ public:
 		cout << array[index-1] << endl;
 		printtree((index*2), space); //left
 	}
+
+	void printtree()
+	{
+		printtree(1, 0);
+	}
 };
 
 class MinHeap
@@ -187,6 +192,11 @@ public:
 
 		cout << array[index-1] << endl;
 		printtree((index*2), space); //left
+	}
+
+	void printtree()
+	{
+		printtree(1, 0);
 	}
 };
 

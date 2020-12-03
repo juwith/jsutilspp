@@ -102,6 +102,12 @@ public:
 		cout << array[index-1].first << endl;
 		printtree((index*2), space); //left
 	}
+
+	void printtree()
+	{
+		printtree(1, 0);
+	}
+
 };
 
 
@@ -204,6 +210,11 @@ public:
 
 		cout << array[index-1].first << endl;
 		printtree((index*2), space); //left
+	}
+
+	void printtree()
+	{
+		printtree(1, 0);
 	}
 };
 
