@@ -1,18 +1,37 @@
-#include<iostream>
-#include<vector>
+#include <functional>
+#include <iostream>
+#include <vector>
 using namespace std;
 
+template <typename T>
 class MaxHeap
 {
-	vector<int> array;
+private :
+	vector<T> array;
+
+	// c style
+	//bool (*compare)(...);
+	function<bool(T first, T second)> compare;
+
+	static bool dcompare(T first, T second)
+	{
+		return first > second;
+	}
 
 public:
-	MaxHeap() {}
-	void insert(int x)
+	MaxHeap()
 	{
+		compare = this->dcompare;
+	}
+	MaxHeap(function<bool(T first, T second)> usercompare)
+	{
+		compare = usercompare;
+	}
+	void insert(T x)
+	{		
 		array.push_back(x);
 		int target = array.size();
-		while( target > 1 && x > array[(target/2)-1]) {
+		while( target > 1 && compare(x,array[(target/2)-1]) ) {
 			array[target-1] = array[(target/2)-1];
 			//cout << "target = " << target << ", target/2 = " << target/2 << endl;
 			target /= 2;
@@ -22,24 +41,24 @@ public:
 		array[target-1] = x;
 	}
 
-	int popMax()
+	T popMax()
 	{
 		//max is always first factor by heapify(insert)
-		int max = array.front();
+		T max = array.front();
 
 		//end factor moves to first factor
 		array.front() = array.back();
 		array.pop_back();
 
 		//heapify
-		int x = array.front();
+		T x = array.front();
 		int parent=1, child=2;
 		int arrSize = array.size();
 		while(child <= arrSize) {
-			if(array[child-1] < array[child]) {
+			if( !compare(array[child-1], array[child]) ) {
 				child++;
 			}
-			if(x >= array[child-1]) {
+			if( compare(x,array[child-1]) || (x == array[child-1]) ) {
 				break;
 			}
 			array[parent-1] = array[child-1];
@@ -51,7 +70,7 @@ public:
 		return max;
 	}
 
-	int getMax()
+	T getMax()
 	{
 		//max is always first factor by heapify(insert)
 		return array.front();
@@ -101,17 +120,37 @@ public:
 	}
 };
 
+template <typename T>
 class MinHeap
 {
-	vector<int> array;
+private :
+	vector<T> array;
+
+	// c style
+	//bool (*compare)(...);
+	function<bool(T first, T second)> compare;
+
+	static bool dcompare(T first, T second)
+	{
+		return first > second;
+	}
+
 
 public:
-	MinHeap() {}
-	void insert(int x)
+	MinHeap()
+	{
+		compare = this->dcompare;
+	}
+	MinHeap(function<bool(T first, T second)> usercompare)
+	{
+		compare = usercompare;
+	}
+
+	void insert(T x)
 	{
 		array.push_back(x);
 		int target = array.size();
-		while( target > 1 && x < array[(target/2)-1]) {
+		while( target > 1 && !compare(x,array[(target/2)-1]) ) {
 			array[target-1] = array[(target/2)-1];
 			//cout << "target = " << target << ", target/2 = " << target/2 << endl;
 			target /= 2;
@@ -121,24 +160,24 @@ public:
 		array[target-1] = x;
 	}
 
-	int popMin()
+	T popMin()
 	{
 		//min is always first factor by heapify(insert)
-		int min = array.front();
+		T min = array.front();
 
 		//end factor moves to first factor
 		array.front() = array.back();
 		array.pop_back();
 
 		//heapify
-		int x = array.front();
+		T x = array.front();
 		int parent=1, child=2;
 		int arrSize = array.size();
 		while(child <= arrSize) {
-			if(array[child-1] > array[child]) {
+			if( compare(array[child-1], array[child]) ) {
 				child++;
 			}
-			if(x <= array[child-1]) {
+			if( !compare(x,array[child-1]) || (x == array[child-1]) ) {
 				break;
 			}
 			array[parent-1] = array[child-1];
@@ -150,7 +189,7 @@ public:
 		return min;
 	}
 
-	int getMin()
+	T getMin()
 	{
 		//min is always first factor by heapify(insert)
 		return array.front();
@@ -204,7 +243,7 @@ public:
 int main()
 {
 ///////max sort
-	MaxHeap myheap;
+	MaxHeap<int> myheap;
 	myheap.insert(60);
 	myheap.insert(18);
 	myheap.insert(100);
@@ -241,7 +280,7 @@ int main()
 ///////////////min sort
 
 	int a[] = {10,5,20,3,4,100,120,130};
-	MinHeap minheap;
+	MinHeap<int> minheap;
 	for(int i=0; i<sizeof(a)/sizeof(int);i++) {
 		minheap.insert(a[i]);
 	}
