@@ -99,7 +99,7 @@ public:
 			cout << " ";
 		}
 
-		cout << array[index-1].first << endl;
+		cout << array[index-1].first << "(" << array[index-1].second << ")"<< endl;
 		printtree((index*2), space); //left
 	}
 
