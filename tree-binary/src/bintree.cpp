@@ -53,7 +53,7 @@ public:
 
 	Node<T>* findNode(T item)
 	{
-		findNode(mNode,item);
+		return findNode(mNode,item);
 	}
 
 	Node<T>* findNode(Node<T>* node, T item)
@@ -98,7 +98,7 @@ public:
 
 	Node<T>* removeNode(T item)
 	{
-		removeNode(mNode,item);
+		return removeNode(mNode,item);
 	}
 
 	Node<T>* removeNode(Node<T>* node, T item)
